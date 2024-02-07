@@ -18,7 +18,10 @@ var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
 var jobsRouter = require('./routes/api/jobs');
+var signUpRouter = require('./routes/signUp')
+
 
 
 var app = express();
@@ -37,6 +40,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/jobs', jobsRouter);
+app.use('/login', loginRouter)
+app.use('/signUp', signUpRouter)
 
 // initialize passport and strategy
 app.use(passport.initialize());
