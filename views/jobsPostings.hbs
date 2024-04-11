@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px 0; /* Add padding to create space between heading and cards */
+            text-align: center; /* Center align text within the body */
+            min-height: 100vh; /* Ensure the body covers the entire viewport */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align content to the top */
+            align-items: center; /* Center content horizontally */
+        }
+        .heading {
+            margin-bottom: 20px;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .card {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        .title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .location {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .description {
+            margin-bottom: 15px;
+        }
+        .responsibilities,
+        .requirements {
+            margin-bottom: 10px;
+        }
+        .contact {
+            font-style: italic;
+        }
+        .apply-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        ul {
+            text-align: center;
+            list-style-position: inside;
+        }
+        .filter-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1 class="heading">Available Jobs</h1>
+    <!-- onChange event added to filter checkboxes -->
+    <div class="filter-container">
+        <h3>Filter by Requirement:</h3>
+        {{#each allRequirements}}
+            <label><input type="checkbox" class="filter-checkbox" value="{{this}}" onchange="filterJobs()">{{this}}</label>
+        {{/each}}
+    </div>
+    
+    {{#each jobs}}
+    <!-- data-requirements attribute added to each card -->
+    <div class="card" data-requirements="{{join this.requirements delimiter=','}}">
+
+        <h2 class="title">{{this.title}}</h2>
+        <p class="location">{{this.location}}</p>
+        <p class="description">{{this.description}}</p>
+        <div class="responsibilities">
+            <h3>Responsibilities:</h3>
+            <ul>
+                {{#each this.responsibilities}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="requirements">
+            <h3>Requirements:</h3>
+            <ul>
+                {{#each this.requirements}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        <p class="salary"><strong>Salary:</strong> {{this.salary}}</p>
+        <p class="contact"><strong>Contact:</strong> {{this.contact}}</p>
+        <button class="apply-button" onclick="apply('{{this.title}}')">Apply</button>
+    </div>
+    {{/each}}
+
+    <script>
+        // Function to filter jobs based on selected requirements
+        function filterJobs() {
+            var selectedRequirements = Array.from(document.querySelectorAll('.filter-checkbox:checked')).map(function(checkbox) {
+                return checkbox.value;
+            });
+
+            document.querySelectorAll('.card').forEach(function(card) {
+                var requirements = card.getAttribute('data-requirements').split(',');
+
+                if (selectedRequirements.every(function(requirement) {
+                    return requirements.includes(requirement);
+                })) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // event listener on checkboxes on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            var checkboxes = document.querySelectorAll('.filter-checkbox');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', filterJobs);
+            });
+        });
+    </script>
+
+</body>
+</html>

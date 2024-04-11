@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work-for-Hire Dashboard</title>
+    <link rel='stylesheet' href='/stylesheets/dashboard.css' />
+</head>
+<body>
+    <div class="container">
+        <h1>Work-for-Hire Dashboard</h1>
+
+        <div class="profile">
+            <img src="{{user.profilePicture}}" alt="Profile Picture">
+            <h2>{{user.name}}</h2>
+            <p><strong>Email:</strong> {{user.email}}</p>
+            <p><strong>Location:</strong> {{user.location}}</p>
+            <p><strong>Skills:</strong> {{#each user.skills}}{{this}}, {{/each}}</p>
+            <p><strong>Bio:</strong> {{user.bio}}</p>
+        </div>
+
+        <h2>Available Job Postings</h2>
+        {{#each jobPostings}}
+            <div class="job-posting">
+                <h3>{{this.title}}</h3>
+                <p><strong>Location:</strong> {{this.location}}</p>
+                <p><strong>Description:</strong> {{this.description}}</p>
+                <p><strong>Responsibilities:</strong> {{#each this.responsibilities}}{{this}}, {{/each}}</p>
+                <p><strong>Requirements:</strong> {{#each this.requirements}}{{this}}, {{/each}}</p>
+                <p><strong>Salary:</strong> {{this.salary}}</p>
+                <p><strong>Contact:</strong> {{this.contact}}</p>
+            </div>
+        {{/each}}
+
+        <h4><a href="/jobsPostings">View other Job Postings</a></h4>
+    </div>
+</body>
+</html>
