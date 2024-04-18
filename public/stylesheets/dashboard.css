@@ -1,4 +1,25 @@
+nav {
+    background-color: #333;
+    overflow: hidden;
+    width: 100%;
+    position: fixed; 
+    top: 0;
+    z-index: 1000; 
+}
+nav a {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
 body {
+    padding-top: 150px;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -6,11 +27,15 @@ body {
 }
 .container {
     width: 80%;
-    margin: 20px auto;
+    margin: 20px auto; /* This sets the top margin as well, overriding the previous margin-top */
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    text-align: center;
+    margin-top: 200px; /* This value should be at least the height of the navbar */
 }
 h1, h2 {
     text-align: center;
