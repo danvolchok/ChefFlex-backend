@@ -135,6 +135,29 @@
                 checkbox.addEventListener('change', filterJobs);
             });
         });
+
+        var buttons = document.querySelectorAll('.apply-button');
+
+        // Iterate through each button and attach the click event handler
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                switch(button.textContent) {
+                    case 'Apply':
+                        // Change the button text to "Applied"
+                        button.textContent = 'Applied';
+                        button.style.backgroundColor = 'red';
+                        break;
+                    case 'Applied':                       
+                        // Change the button text back to "Apply"
+                        button.textContent = 'Apply';
+                        button.style.backgroundColor = '#007bff';
+                        break;
+                    default:
+                        // Handle any other cases here
+                        break;
+                }
+            });
+        });
     </script>
 
 </body>
